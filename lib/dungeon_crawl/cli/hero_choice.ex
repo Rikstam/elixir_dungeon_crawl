@@ -1,4 +1,7 @@
 defmodule DungeonCrawl.CLI.HeroChoice do
+  @moduledoc """
+  This module is responsible for displaying the list of heroes and asking the user to choose one.
+  """
   alias Mix.Shell.IO, as: Shell
 
   def start do
@@ -18,6 +21,10 @@ defmodule DungeonCrawl.CLI.HeroChoice do
     |> confirm_hero
   end
 
+  @doc """
+  Take the list of heroes, map their names, and display them in a numbered list, starting with 1.
+  We used the Enum.with_index function to generate a list of tuples that contain the heroes’ names and their corresponding index numbers.
+  """
   defp display_options(options) do
     options
     |> Enum.with_index(1)
