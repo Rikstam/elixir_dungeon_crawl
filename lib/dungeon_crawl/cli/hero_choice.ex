@@ -23,20 +23,6 @@ defmodule DungeonCrawl.CLI.HeroChoice do
   end
 
   @doc """
-  Take the list of heroes, map their names, and display them in a numbered list, starting with 1.
-  We used the Enum.with_index function to generate a list of tuples that contain the heroes’ names and their corresponding index numbers.
-  """
-  defp display_options(options) do
-    options
-    |> Enum.with_index(1)
-    |> Enum.each(fn {option, index} ->
-      Shell.info("#{index} - #{option}")
-    end)
-
-    options
-  end
-
-  @doc """
   In the confirm_hero/1 function we clear the screen, display the details of the chosen hero, and ask the user to confirm the choice.
   Windows users need to replace the clear command with cls to clear the screen.
   We use the yes?/1 function from Mix.Shell.IO to get the user input, check if it’s a positive answer, and parse it to a Boolean value.

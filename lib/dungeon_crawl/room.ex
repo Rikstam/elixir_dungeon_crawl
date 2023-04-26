@@ -1,6 +1,8 @@
 defmodule DungeonCrawl.Room do
   alias DungeonCrawl.Room
 
+  import DungeonCrawl.Room.Action
+
   defstruct description: nil,
             actions: []
 
@@ -9,7 +11,8 @@ defmodule DungeonCrawl.Room do
       %Room{
         description: "You found a quiet place. Looks safe to rest.",
         actions: [
-          [forward(), rest()]
+          forward(),
+          rest()
         ]
       }
     ]
