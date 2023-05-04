@@ -13,8 +13,8 @@ defmodule DungeonCrawl.CLI.HeroChoice do
     find_hero_by_index = &Enum.at(heroes, &1)
 
     heroes
-    |> Enum.map(& &1.name)
     |> display_options
+    |> Enum.map(& &1.name)
     |> generate_question
     |> Shell.prompt()
     |> parse_answer

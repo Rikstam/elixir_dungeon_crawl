@@ -10,9 +10,8 @@ defmodule DungeonCrawl.CLI.RoomActionsChoice do
 
     chosen_action =
       room_actions
-      |> IO.inspect()
-      |> Enum.map(& &1.label)
       |> display_options
+      |> Enum.map(& &1.label)
       |> generate_question
       |> Shell.prompt()
       |> parse_answer
