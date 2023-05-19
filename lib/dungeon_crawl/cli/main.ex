@@ -8,10 +8,20 @@ defmodule DungeonCrawl.CLI.Main do
     crawl(hero_choice(), DungeonCrawl.Room.all())
   end
 
+  defp crawl(%{hit_points: 0}, _rooms) do
+    Shell.prompt("")
+    Shell.cmd("clear")
+    Shell.info("You have died!")
+    Shell.info("Game over!")
+    Shell.prompt("")
+  end
+
   defp crawl(character, rooms) do
     Shell.info("You keep moving toward the next room.")
     Shell.prompt("Press enter to continue")
     Shell.cmd("clear")
+
+    Shell.info(DungeonCrawl.Character.current_stats(character))
 
     rooms
     |> Enum.random()
@@ -27,10 +37,11 @@ defmodule DungeonCrawl.CLI.Main do
   end
 
   defp hero_choice do
-    DungeonCrawl.CLI.HeroChoice.start()
+    hero = DungeonCrawl.CLI.HeroChoice.start()
+    %{hero | name: "You"}
   end
 
-  defp trigger_action({room, action},character) do
+  defp trigger_action({room, action}, character) do
     Shell.cmd("clear")
     room.trigger.run(character, action)
   end

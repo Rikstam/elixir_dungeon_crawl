@@ -16,6 +16,13 @@ defmodule DungeonCrawl.Room do
           forward()
         ],
         trigger: Triggers.Exit
+      },
+      %Room{
+        description: "You see an enemy.",
+        actions: [
+          forward()
+        ],
+        trigger: Triggers.Enemy
       }
     ]
 end
