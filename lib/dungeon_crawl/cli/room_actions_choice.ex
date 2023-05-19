@@ -8,14 +8,7 @@ defmodule DungeonCrawl.CLI.RoomActionsChoice do
 
     Shell.info(room.description)
 
-    chosen_action =
-      room_actions
-      |> display_options
-      |> Enum.map(& &1.label)
-      |> generate_question
-      |> Shell.prompt()
-      |> parse_answer
-      |> find_action_by_index.()
+    chosen_action = ask_for_option(room_actions)
 
     {room, chosen_action}
   end

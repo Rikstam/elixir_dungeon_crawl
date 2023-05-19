@@ -1,6 +1,36 @@
 defmodule DungeonCrawl.CLI.BaseCommands do
   alias Mix.Shell.IO, as: Shell
 
+  def ask_for_index(options) do
+    answer =
+      options
+      |> display_options()
+      |> generate_question()
+      |> Shell.prompt
+      |> Integer.parse
+
+    case answer do
+      :error ->
+        display_invalid_option()
+        ask_for_index(options)
+        {option, _} -> option - 1
+    end
+  end
+
+  defp display_invalid_option do
+    Shell.cmd("clear")
+    Shell.prompt"Invalid option, please press Enter to  try again")
+    Shell.cmd("clear")
+  end
+
+  def ask_for_option(options) do
+    index = ask_for_index(options)
+    chosen_option = Enum.at(options, index)
+    chosen_option
+      || (display_invalid_option() && ask_for_option(options))
+  end
+
+
   def display_options(options) do
     options
     |> Enum.with_index(1)
